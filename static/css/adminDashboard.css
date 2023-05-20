@@ -1,0 +1,152 @@
+:root {
+    --primary-color: #333;
+    --secondary-color: #fff;
+    --accent-color: #f2f2f2;
+    --hover-color: #aaa;
+    --text-color: #444;
+    --highlight-color: #555;
+    --box-shadow-color: #333;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    width: 100%;
+    height: 80px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header div {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header div h1 {
+    font-size: 30px;
+}
+
+.verticle-line {
+    width: 3px;
+    height: 100%;
+    background-color: var(--primary-color);
+}
+
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 10px;
+}
+
+nav ul li a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: var(--hover-color);
+}
+
+
+main {
+    width: 100%;
+    height: calc(100vh - 160px);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.stat-div {
+    text-align: center;
+    padding: 100px 30px;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.vedio-div {
+    width: 50%;
+    padding: 60px 30px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.vedio-div img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    box-shadow: -1px 2px 5px var(--box-shadow-color);
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    color: var(--text-color);
+    border: 1px solid var(--accent-color);
+}
+
+th {
+    background-color: var(--accent-color);
+    font-weight: bold;
+    padding: 12px;
+    text-align: center;
+    border: 1px solid var(--accent-color);
+}
+
+td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid var(--accent-color);
+}
+
+tr:nth-child(even) {
+    background-color: var(--accent-color);
+}
+
+tr:hover {
+    background-color: var(--hover-color);
+}
+
+.table-header {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--highlight-color);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+footer {
+    width: 100%;
+    height: 80px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

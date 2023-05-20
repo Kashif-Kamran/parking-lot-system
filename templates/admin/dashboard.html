@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css"
+            href="{{ url_for('static', filename='css/theme.css') }}">
+        <link rel="stylesheet" type="text/css"
+            href="{{ url_for('static', filename='css/adminDashboard.css') }}">
+        <title>Admin Dashboard</title>
+        <style>
+            
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="header-content">
+                <h1>Admin Dashboard</h1>
+                <nav>
+                    <ul>
+                        <li><a href="/admin/notification">Notifications</a></li>
+                        <li><a href="#">Historical Analysis</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main>
+            <div class="stat-div">
+                <h1>Statistics</h1>
+                <table>
+                    <thead>
+                        <th>
+                            <td>Description</td>
+                            <td>Value</td>
+                        </th>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="verticle-line"></div>
+            <div class="vedio-div">
+                <h1>Live Cam Feed</h1>
+                <div>
+                    <img src="{{
+                        url_for('admin.video_feed') }}"
+                        alt>
+                </div>
+            </div>
+        </main>
+        <footer>
+
+        </footer>
+
+        <script>
+            function refreshData() {
+                fetch('/admin/get-states')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    let statDivTable = document.querySelector('.stat-div table');
+                    statDivTable.querySelector('tbody').innerHTML = `
+                        <tr>
+                            <td>1</td>
+                            <td>Total Parking Slotes </td>
+                            <td>${data.totalSpots}</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Occupied Parking Slotes </td>
+                            <td>${data.totalOccupiedSpots}</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Available Parking Slotes </td>
+                            <td>${data.freeSpots}</td>
+                        </tr>
+                    
+                    `;
+                }
+                ).catch((error)=>{
+                    console.log("Error : ", error)
+                })
+    }   
+    refreshData()
+    setInterval(refreshData, 1000);
+        </script>
+    </body>
+</html>

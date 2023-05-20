@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Welcome to the Website</title>
+        <style>
+        :root {
+            --primary-color: #333;
+            --secondary-color: #fff;
+            --accent-color: #f2f2f2;
+            --hover-color: #aaa;
+            --text-color: #444;
+            --highlight-color: #555;
+            --box-shadow-color: #333;
+        }
+
+        body {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--accent-color);
+            border-radius: 10px;
+            box-shadow: 0 0 10px var(--box-shadow-color);
+        }
+
+        .welcome-message {
+            flex: 1;
+            margin-right: 40px;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .app-info {
+            flex: 1;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+            color: var(--text-color);
+        }
+
+        li:before {
+            content: "\2022";
+            position: absolute;
+            left: 0;
+            color: var(--highlight-color);
+        }
+
+        .buttons {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .button {
+            margin-bottom: 10px;
+            padding: 10px 20px;
+            background-color: var(--highlight-color);
+            color: var(--secondary-color);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: var(--hover-color);
+        }
+    </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="welcome-message">
+                <h1>Welcome to Parking Lot System</h1>
+                <p>Explore the features and services we offer.</p>
+                <div class="app-info">
+                    <h2>About Our Application</h2>
+                    <p>Our application provides:</p>
+                    <ul>
+                        <li>Secure login for administrators</li>
+                        <li>Request spot functionality for users</li>
+                        <li>Advanced scheduling and availability management</li>
+                        <li>Real-time notifications and updates</li>
+                        <li>And much more!</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <a href="/admin/login" class="button">Go to Login (Admin)</a>
+                <a href="/user/request-parking" class="button">Go to Request
+                    Spot</a>
+            </div>
+        </div>
+    </body>
+</html>

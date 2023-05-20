@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login Page</title>
+        <link rel="stylesheet" type="text/css"
+            href="{{ url_for('static', filename='css/theme.css') }}">
+        <link rel="stylesheet" type="text/css"
+            href="{{ url_for('static', filename='css/login.css') }}">
+    </head>
+    <body>
+        <div class="login-container">
+            <form class="login-form" action="/admin/spot-reserv-request"
+                method="POST">
+                <h1>Request Spot</h1>
+                <input type="text" placeholder="Enter User Full Name">
+                <input type="email" placeholder="Enter User Email">
+                <input type="text" placeholder="Enter Number Plate">
+                <input type="text" placeholder="Enter Car Color">
+                <input type="submit" value="Request For Spot">
+            </form>
+        </div>
+    </body>
+</html>
