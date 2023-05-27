@@ -1,14 +1,14 @@
 
-from flask import Blueprint, render_template, Response, jsonify
+from flask import Blueprint, render_template, Response, jsonify, request
 from services.vedio_reading import gen_frames
-import services.ParkingLotService as parkingSpotService
+from services.ParkingLotService import ParkingLot
 adminRoute = Blueprint('admin', __name__, url_prefix='/admin')
 
-
+parkingLot = ParkingLot.get_instance()
 # Getting Pages Routes
 
 adminInfo = {
-    "name": "Admin",
+    "name": "admin",
     "password": "admin"
 }
 
@@ -18,9 +18,10 @@ def getDashboardPage():
     return render_template('admin/dashboard.html')
 
 
-@adminRoute.route("/notifications")
+@adminRoute.route("/notification")
 def getNotificationPage():
-    return render_template('admin/notification.html')
+    notificationsList = parkingLot.get_notification_list()
+    return render_template('admin/notification.html', notifications=notificationsList)
 
 
 @adminRoute.route('/login')
@@ -30,7 +31,12 @@ def getLoginPage():
 
 @adminRoute.route('/login', methods=['POST'])
 def loginPost():
-    return render_template('admin/dashboard.html')
+    formData = request.form.to_dict()
+
+    if formData["username"] == adminInfo["name"] and formData["password"] == adminInfo["password"]:
+        return render_template('admin/dashboard.html')
+    else:
+        return render_template('admin/login_error.html')
 
 
 # Getting Routes Data
@@ -42,11 +48,13 @@ def video_feed():
 
 @adminRoute.route('/error')
 def getErrorPage():
-    print("Error")
     return render_template('/admin/login_error.html')
 
 
-# @adminRoute.route('/get-states')
-# def get_states():
-#     stats = parkingSpotService.getStatisticalData()
-#     return jsonify(stats)
+@adminRoute.route('/get-states')
+def get_states():
+    stats = parkingLot.get_parking_spot_list()
+    return jsonify(stats)
+
+
+# initlize a list with two default objects

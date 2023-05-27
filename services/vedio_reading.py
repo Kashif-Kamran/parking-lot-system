@@ -26,16 +26,16 @@ def checkParkingSpace(imgPro, img):
         count = cv2.countNonZero(imgCrop)
 
         if count < 900:
+            # this condition shows that the parking spot is free
             color = (0, 255, 0)
             thickness = 2
             spaceCounter += 1
             if (pos.statusFree == False):
                 pos.time = datetime.now()
                 pos.statusFree = True
-            time_str = pos.time.strftime("%H:%M:%S")
             cv2.rectangle(img, (pos.x, pos.y), (pos.x + pos.width,
-                                                pos.y + pos.height), color, thickness)
-            cvzone.putTextRect(img, str(time_str), (x, y + height - 3), scale=1,
+                          pos.y + pos.height), color, thickness)
+            cvzone.putTextRect(img, str(pos.spotId), (x, y + height - 3), scale=1,
                                thickness=2, offset=0, colorR=color)
 
         else:

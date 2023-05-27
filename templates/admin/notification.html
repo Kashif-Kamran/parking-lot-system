@@ -8,6 +8,107 @@
             href="{{ url_for('static', filename='css/theme.css') }}">
         <link rel="stylesheet" type="text/css"
             href="{{ url_for('static', filename='css/adminDashboard.css') }}">
+        <style>
+        :root {
+            --primary-color: #333;
+            --secondary-color: #fff;
+            --accent-color: #f2f2f2;
+            --hover-color: #aaa;
+            --text-color: #444;
+            --highlight-color: #555;
+            --box-shadow-color: #333;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--accent-color);
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            padding: 20px;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--secondary-color);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--highlight-color);
+        }
+
+        thead tr {
+            background-color: var(--primary-color);
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: var(--accent-color);
+        }
+
+        tbody tr:hover {
+            background-color: var(--hover-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .btn-success,
+        .btn-danger {
+            display: inline-block;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            }
+
+            .btn-success {
+            background-color: #28a745;
+            color: #fff;
+            }
+
+            .btn-danger {
+            background-color: #dc3545;
+            color: #fff;
+            }
+
+            .btn-success:hover {
+            background-color: #218838;
+            }
+
+            .btn-danger:hover {
+            background-color: #c82333;
+            }
+
+    </style>
         <title>Admin | Notification</title>
     </head>
     <body>
@@ -23,7 +124,37 @@
             </div>
         </header>
         <main>
-            
+            <div class="notification-container">
+                <div>
+                    <h2 style="text-align: center;padding-bottom: 30px;">Notifications</h2>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Owner Name</th>
+                            <th>Owner Email</th>
+                            <th>Vehicle No. Plate</th>
+                            <th>Vehicle Color</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for notification in notifications %}
+                        <tr>
+                            <td>{{ notification.owner_name }}</td>
+                            <td>{{ notification.owner_email }}</td>
+                            <td>{{ notification.no_plate }}</td>
+                            <td>{{ notification.color }}</td>
+                            <td>
+                                <button class="btn btn-success"><a href="#">Accept</a></button>
+                                <!-- this will send the -->
+                                <button class="btn btn-danger"><a href="#">Reject</a></button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </main>
     </body>
 </html>

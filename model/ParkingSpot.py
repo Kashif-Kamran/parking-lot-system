@@ -2,7 +2,8 @@
 
 
 class ParkingSpot:
-    def __init__(self, x, y, width, height, status, isBooked):
+    def __init__(self, id, x, y, width, height, status, isBooked):
+        self.spotId = id
         self.x = x
         self.y = y
         self.width = width

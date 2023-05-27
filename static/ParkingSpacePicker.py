@@ -21,7 +21,8 @@ class ParkingSpotSelector:
             # Load the image and display the selected parking spots on it
             img = cv2.imread(self.image_path)
             for spot in self.spot_list:
-                cv2.rectangle(img, spot, (spot[0] + self.spot_width, spot[1] + self.spot_height), (0, 255, 0), 2)
+                cv2.rectangle(
+                    img, spot, (spot[0] + self.spot_width, spot[1] + self.spot_height), (0, 255, 0), 2)
                 print("Spot", spot)
             # Show the image and handle mouse clicks
             cv2.imshow("Car Park", img)

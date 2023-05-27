@@ -14,6 +14,23 @@ class ParkingLot:
             ParkingLot.__instance = self
             self.parking_spot_list = []
             self.booked_spots = []
+            self.notification_list = [
+                {
+                    "id": 1,
+                    "owner_name": "Kashif Kamran",
+                    "owner_email": "kashifkamran.stud@gmail.com",
+                    "no_plate": "ABC-123",
+                    "color": "Red"
+                },
+                {
+                    "id": 2,
+                    "owner_name": "Amir Hussain",
+                    "owner_email": "amirhussain@gmail.com",
+                    "no_plate": "ABC-678",
+                    "color": "Green"
+                }
+            ]
+
             self.read_pickle()
 
     @staticmethod
@@ -30,9 +47,10 @@ class ParkingLot:
         width = 107
         height = 48
 
-        for spot in posList:
-            self.parking_spot_list.append(ParkingSpot(
-                spot[0], spot[1], width, height, False, False))
+        for i, spot in enumerate(posList):
+            tempSpot = ParkingSpot(
+                i, spot[0], spot[1], width, height, False, False)
+            self.parking_spot_list.append(tempSpot)
 
     def add_parking_spot(self, parking_spot):
         self.parking_spot_list.append(parking_spot)
@@ -43,12 +61,18 @@ class ParkingLot:
     def get_parking_spot_list(self):
         return self.parking_spot_list
 
-    def get_parking_spot_listDict(self):
-        return [spot.to_dict() for spot in self.parking_spot_list]
+    def add_new_notification(self, notification):
+        # if notification with no_plate already exists return false else add notification and return true
+        for notif in self.notification_list:
+            if notif["no_plate"] == notification["no_plate"]:
+                print("Notification with this no_plate already exists")
+                return False
+        notification["id"] = len(self.notification_list) + 1
+        self.notification_list.append(notification)
+        return True
 
-    def print_parking_spot_list(self):
-        for spot in self.parking_spot_list:
-            print(spot.to_dict())
+    def get_notification_list(self):
+        return self.notification_list
 
 
 # init main functionality here

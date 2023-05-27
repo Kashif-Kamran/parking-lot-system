@@ -1,8 +1,38 @@
-from flask import Blueprint, render_template, Response, jsonify
+from services.ParkingLotService import ParkingLot
+from flask import Blueprint, render_template, Response, jsonify, request
 userRoute = Blueprint('user', __name__, url_prefix='/user')
-
-
+parkingLot = ParkingLot.get_instance()
 # Page Getting Routes
+
+
 @userRoute.route('/request-parking')
 def getLoginPage():
-    return render_template('user/register.html')
+    response = {
+        "status": True,
+        "message": ""
+    }
+    return render_template('user/request_spot.html', response=response)
+
+
+@userRoute.route("/request-parking", methods=['POST'])
+def registerPost():
+    data = request.form.to_dict()
+    result = parkingLot.add_new_notification(data)
+    if result:
+        response = {
+            "status": True,
+            "message": "Notification added successfully"
+        }
+        return render_template('user/request_spot.html', response=response)
+    else:
+        response = {
+            "status": False,
+            "message": "Notification with this no_plate already exists"
+        }
+        return render_template('user/request_spot.html', response=response)
+
+
+@userRoute.route('/dashboard')
+def getDashboardPage():
+    return render_template('user/dashboard.html')
+    pass
