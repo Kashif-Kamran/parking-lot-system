@@ -131,6 +131,7 @@
                 <table>
                     <thead>
                         <tr>
+                            <th>Id</th>
                             <th>Owner Name</th>
                             <th>Owner Email</th>
                             <th>Vehicle No. Plate</th>
@@ -141,12 +142,14 @@
                     <tbody>
                         {% for notification in notifications %}
                         <tr>
+                            <td>{{ notification.id }}</td>
                             <td>{{ notification.owner_name }}</td>
                             <td>{{ notification.owner_email }}</td>
                             <td>{{ notification.no_plate }}</td>
                             <td>{{ notification.color }}</td>
                             <td>
-                                <button class="btn btn-success"><a href="#">Accept</a></button>
+                                <button class="btn btn-success"><a
+                                        href="{{ url_for('admin.accept_notification', id=notification.id)}}">Accept</a></button>
                                 <!-- this will send the -->
                                 <button class="btn btn-danger"><a href="#">Reject</a></button>
                             </td>

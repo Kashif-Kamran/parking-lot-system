@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css"
+            href="{{ url_for('static', filename='css/theme.css') }}">
+        <link rel="stylesheet" type="text/css"
+            href="{{ url_for('static', filename='css/adminDashboard.css') }}">
+        <title>Admin | Notification | Accept </title>
+        <style>
+
+        .stat-div {
+            width: 500px;
+            margin: 0 auto;
+            display: block;
+            text-align: center;
+        }
+
+        .stat-div h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .stat-div select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f7f7f7;
+            color: #333;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .stat-div select:focus {
+            outline: none;
+            border-color: #6a7ec0;
+            box-shadow: 0 0 5px rgba(106, 126, 192, 0.5);
+        }
+
+        .stat-div button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #6a7ec0;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+.stat-div button:hover {
+  background-color: #506c9a;
+}
+
+.stat-div button:focus {
+  outline: none;
+}
+
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="header-content">
+                <h1>Accept Notification</h1>
+                <nav>
+                    <ul>
+                        <li>{{data.notification.owner_name}}</li>
+                        <li>{{data.notification.no_plate}}</li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main>
+            <div class="stat-div">
+                <h1>Select Spot</h1>
+                <form
+                    action="{{ url_for('admin.accept_notification', id=data.notification.id)}}"
+                    method="POST">
+                    <select name="spotId">
+                        <option value disabled selected>Select Spot ID</option>
+                        {% for spot in data.availableSpots %}
+                        <option value="{{ spot.spotId }}">{{ spot.spotId }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+            <div class="verticle-line"></div>
+            <div class="vedio-div">
+                <h1>Live Cam Feed</h1>
+                <div>
+                    <img src="{{
+                        url_for('admin.video_feed') }}"
+                        alt>
+                </div>
+            </div>
+        </main>
+        <footer>
+
+        </footer>
+
+    </body>
+</html>

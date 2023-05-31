@@ -13,7 +13,6 @@ class ParkingLot:
         else:
             ParkingLot.__instance = self
             self.parking_spot_list = []
-            self.booked_spots = []
             self.notification_list = [
                 {
                     "id": 1,
@@ -58,8 +57,28 @@ class ParkingLot:
     def remove_parking_spot(self, parking_spot):
         self.parking_spot_list.remove(parking_spot)
 
+    def get_parking_spot_by_id(self, id):
+        spot = next(filter(lambda spot: spot.spotId ==
+                    id, self.parking_spot_list), None)
+        return spot
+        pass
+
     def get_parking_spot_list(self):
         return self.parking_spot_list
+
+    # notifications
+
+    def get_notification_by_id(self, id):
+        return next(
+            filter(lambda notification: notification['id'] == id, self.notification_list), None)
+
+    def get_notification_list(self):
+        return self.notification_list
+
+    def remove_notification_by_id(self, id):
+        notification = self.get_notification_by_id(id)
+        self.notification_list.remove(notification)
+        return notification
 
     def add_new_notification(self, notification):
         # if notification with no_plate already exists return false else add notification and return true
@@ -69,10 +88,22 @@ class ParkingLot:
                 return False
         notification["id"] = len(self.notification_list) + 1
         self.notification_list.append(notification)
+
         return True
 
-    def get_notification_list(self):
-        return self.notification_list
+    # booking
+
+    def get_booked_spot_by_id(self, id):
+        return next(
+            filter(lambda spot: spot.id == id, self.booked_spots), None)
+
+    def book_spot(self, spotID, vehicle):
+
+        spot = self.get_parking_spot_by_id(spotID)
+        spot.bookSpot(vehicle)
+
+    def get_booked_spots(self):
+        return [x for x in self.parking_spot_list if x.isBooked == True]
 
 
 # init main functionality here

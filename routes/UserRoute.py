@@ -1,4 +1,5 @@
 from services.ParkingLotService import ParkingLot
+from model.Vehicle import Vehicle
 from flask import Blueprint, render_template, Response, jsonify, request
 userRoute = Blueprint('user', __name__, url_prefix='/user')
 parkingLot = ParkingLot.get_instance()
@@ -34,5 +35,8 @@ def registerPost():
 
 @userRoute.route('/dashboard')
 def getDashboardPage():
-    return render_template('user/dashboard.html')
+    spots = parkingLot.get_booked_spots()
+    print("Here")
+    [print(x.to_dict()) for x in spots]
+    return render_template('user/dashboard.html', spots=spots)
     pass

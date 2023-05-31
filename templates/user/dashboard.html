@@ -10,7 +10,9 @@
             href="{{ url_for('static', filename='css/adminDashboard.css') }}">
         <title>Admin Dashboard</title>
         <style>
-            
+            .stat-div{
+                display: block;
+            }
         </style>
     </head>
     <body>
@@ -26,16 +28,26 @@
         </header>
         <main>
             <div class="stat-div">
-                <h1>Statistics</h1>
+                <h1>Booked Spots</h1>
                 <table>
                     <thead>
-                        <th>
-                            <td>Description</td>
-                            <td>Value</td>
-                        </th>
+                        <tr>
+                            <th>Spot No.</th>
+                            <th>Vehicle No.</th>
+                            <th>Owner Name</th>
+                            <th>Owner Email</th>
+                        </tr>
                     </thead>
+                    <!-- '{self.spotId},  {self.x}, {self.y}, {self.width}, {self.height}, {self.statusFree}, {self.time}' -->
                     <tbody>
-
+                        {% for spot in spots %}
+                        <tr>
+                            <td>{{ spot.spotId }}</td>
+                            <td>{{ spot.vehicle.noPlate }}</td>
+                            <td>{{ spot.vehicle.ownerName }}</td>
+                            <td>{{ spot.vehicle.ownerEmail }}</td>
+                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
